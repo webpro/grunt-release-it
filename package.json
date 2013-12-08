@@ -1,0 +1,39 @@
+{
+  "name": "grunt-release-it",
+  "description": "Interactive release task for Git repositories. Optionally release a build to distribution/component repository.",
+  "version": "0.0.1",
+  "homepage": "https://github.com/webpro/grunt-release-it",
+  "author": {
+    "name": "Lars Kappert",
+    "email": "lars@webpro.nl"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/webpro/grunt-release-it.git"
+  },
+  "bugs": {
+    "url": "https://github.com/webpro/grunt-release-it/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://webpro.mit-license.org"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.0"
+  },
+  "keywords": [
+    "gruntplugin",
+    "release",
+    "component"
+  ],
+  "dependencies": {
+    "semver": "~2.2.1",
+    "shelljs": "~0.2.6",
+    "inquirer": "~0.3.5"
+  }
+}
