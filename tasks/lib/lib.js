@@ -58,7 +58,7 @@ module.exports = function(grunt) {
                 var pkg = JSON.parse(fs.readFileSync(file).toString());
                 pkg.version = version;
                 grunt.file.write(file, JSON.stringify(pkg, null, 2));
-                grunt.log.ok('Version bumped to ' + version);
+                grunt.log.ok('Version bumped to ' + version + ' (' + path.basename(file) + ')');
             } else {
                 grunt.log.writeln('File not found:', file);
             }
