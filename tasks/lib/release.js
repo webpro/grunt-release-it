@@ -1,6 +1,9 @@
-var inquirer = require('inquirer');
+var inquirer = require('inquirer'),
+    when = require('when');
 
-module.exports = function(git, options, repository, done) {
+module.exports = function(git, options, repository) {
+
+    var enquiry = when.defer();
 
     inquirer.prompt([{
         type: 'confirm',
@@ -45,7 +48,9 @@ module.exports = function(git, options, repository, done) {
             git.push(repository);
             git.pushTags(options.version);
         }
-        done();
+        enquiry.resolve();
     });
+
+    return enquiry.promise;
 
 };
