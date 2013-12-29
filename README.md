@@ -61,18 +61,21 @@ You must set `distRepo` to a git endpoint (e.g. `'git@github.com:webpro/awesome-
 
 Many steps need your confirmation before execution.
 
-a. By default, with the current repository:
-	1. The version in each of the `pkgFiles` will be incremented (see [usage](#usage)).
-	1. This change will be committed with the `commitMessage`.
-	1. This commit is tagged with `tagName` (and `tagAnnotation`). The `%s` will be replaced with the updated version.
-	1. The commit plus the tag are pushed.
-	1. If no `distRepo` is configured, the package is published.
-a. Additionally, if a distribution repository is configured:
-	1. The plugin will create the distribution build using the `distBuildTask` Grunt task.
-	1. The `distStageDir` is where the plugin will clone the `distRepo`.
-	1. The `distFiles` are copied here (normalized by removing the `distBase` from the target path).
-	1. Steps a1-a4 are executed for the distribution repository.
-	1. The package is published. 
+By default, with the current repository:
+
+1. The version in each of the `pkgFiles` will be incremented (see [usage](#usage)).
+1. This change will be committed with the `commitMessage`.
+1. This commit is tagged with `tagName` (and `tagAnnotation`). The `%s` will be replaced with the updated version.
+1. The commit plus the tag are pushed.
+1. If no `distRepo` is configured, the package is published.
+
+Additionally, if a distribution repository is configured:
+
+1. The plugin will create the distribution build using the `distBuildTask` Grunt task.
+1. The `distStageDir` is where the plugin will clone the `distRepo`.
+1. The `distFiles` are copied here (normalized by removing the `distBase` from the target path).
+1. Steps 1-4 above are executed for the distribution repository.
+1. The package is published. 
 
 Also see the [example output](#example-output) below.
 
