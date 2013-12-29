@@ -11,20 +11,26 @@ module.exports = function(grunt) {
 
     function run(command, options, message) {
 
+        var result = null;
+
         if(typeof options === 'string') {
             message = options;
             options = {silent: true};
         }
 
+        options = options || {silent: true};
+
         if(isDryRun) {
             grunt.log.writeln('[DRYRUN] ' + command);
         } else {
             grunt.verbose.writeln('Running: ' + command);
-            shell.exec(command, options);
+            result = shell.exec(command, options);
             if(message) {
                 grunt.log.ok(message);
             }
         }
+
+        return result;
     }
 
     function cd(path) {
@@ -88,7 +94,7 @@ module.exports = function(grunt) {
         if(isDryRun) {
             grunt.log.writeln('[DRYRUN] ' + command);
         } else {
-            shell.exec(command, {silent: true});
+            shell.exec(command);
             if(shell.error()) {
                 grunt.fail.warn('Repository must be clean.');
             }
@@ -101,13 +107,14 @@ module.exports = function(grunt) {
             grunt.log.writeln('[DRYRUN] ' + command);
             return true;
         } else {
-            run(command);
-            if(shell.error()) {
-                return true;
-            } else {
-                grunt.fail.warn('Nothing to commit.');
+            var result = run(command);
+            if(result.code !== 1) {
+                if(result.code === 128) {
+                    grunt.fail.warn(result.output);
+                }
                 return isForced;
             }
+            return true;
         }
     }
 
@@ -136,13 +143,16 @@ module.exports = function(grunt) {
     }
 
     function tag(version, tag, annotation) {
-        run('git tag' + (isForced ? ' -f' : '') + ' -a --message="' + util.format(annotation, version) + '" ' + util.format(tag, version));
+        var result = run('git tag' + (isForced ? ' -f' : '') + ' -a --message="' + util.format(annotation, version) + '" ' + util.format(tag, version));
+        if(result.code !== 0) {
+            grunt.fail.warn(result.output);
+        }
     }
 
     function push(repository) {
-        run('git push ' + repository, {silent: false});
-        if(shell.error()) {
-            grunt.fail.fatal('Unable to push to remote ' + repository);
+        var result = run('git push ' + repository);
+        if(result.code !== 0) {
+            grunt.fail.warn(result.output);
         }
     }
 
