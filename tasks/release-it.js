@@ -1,5 +1,4 @@
 var path = require('path'),
-    fs = require('fs'),
     release = require('./lib/release');
 
 module.exports = function(grunt) {
@@ -10,27 +9,30 @@ module.exports = function(grunt) {
 
     grunt.registerTask('release-it', 'Release repository.', function(increment) {
 
+        var done = this.async();
+
+        // Read/set options from task config
+
         var options = this.options({
             pkgFiles: ['package.json'],
-            bowerFile: 'bower.json',
-            srcDir: path.resolve(''),
-            distStageDir: '.stage',
-            distRepo: false,
-            distFiles: ['dist/**/*'],
-            distBase: 'dist/',
-            distBuildTask: false,
             commitMessage: 'Release %s',
             tagName: '%s',
-            tagAnnotation: '%s'
+            tagAnnotation: '%s',
+            distRepo: false,
+            distStageDir: '.stage',
+            distFiles: ['dist/**/*'],
+            distBase: 'dist/',
+            distBuildTask: false
         });
+
+        // Additional settings
 
         var pkg = grunt.file.readJSON(options.pkgFiles[0]);
 
-        options.distStageDir = path.resolve(options.srcDir, options.distStageDir);
+        options.srcDir = path.resolve('');
         options.srcRepo = pkg.repository.url;
+        options.distStageDir = path.resolve(options.srcDir, options.distStageDir);
         options.version = util.incrementVersion(pkg.version, increment);
-
-        var done = this.async();
 
         var finished = function() {
             util.cd(options.srcDir);
