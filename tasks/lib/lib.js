@@ -11,7 +11,7 @@ module.exports = function(grunt) {
 
     function run(command, options, message) {
 
-        var result = null;
+        var result = {};
 
         if(typeof options === 'string') {
             message = options;
@@ -108,7 +108,7 @@ module.exports = function(grunt) {
             return true;
         } else {
             var result = run(command);
-            if(result.code !== 1) {
+            if('code' in result && result.code !== 1) {
                 if(result.code === 128) {
                     grunt.fail.warn(result.output);
                 }
@@ -144,14 +144,14 @@ module.exports = function(grunt) {
 
     function tag(version, tag, annotation) {
         var result = run('git tag' + (isForced ? ' -f' : '') + ' -a --message="' + util.format(annotation, version) + '" ' + util.format(tag, version));
-        if(result.code !== 0) {
+        if('code' in result && result.code !== 0) {
             grunt.fail.warn(result.output);
         }
     }
 
     function push(repository) {
         var result = run('git push ' + repository);
-        if(result.code !== 0) {
+        if('code' in result && result.code !== 0) {
             grunt.fail.warn(result.output);
         }
     }
