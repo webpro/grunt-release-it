@@ -31,7 +31,7 @@ module.exports = function(grunt) {
         var pkg = grunt.file.readJSON(options.pkgFiles[0]);
 
         options.srcDir = path.resolve('');
-        options.srcRepo = pkg.repository.url;
+        options.srcRepo = options.srcRepo ? options.srcRepo : pkg.repository && pkg.repository.url ? pkg.repository.url : null;
         options.distStageDir = path.resolve(options.srcDir, options.distStageDir);
         options.version = util.incrementVersion(pkg.version, increment);
 
@@ -40,6 +40,10 @@ module.exports = function(grunt) {
             grunt.log.subhead('Release source repo');
 
             var releaseSource = when.defer();
+
+            if(!options.srcRepo) {
+                return releaseSource.reject({fail: 'Unable to read Git source repo from either the "srcRepo" task config or the repository.url property in ' + options.pkgFiles[0] + '.'});
+            }
 
             options.pkgFiles.forEach(function(pkgFile) {
                 util.bump(pkgFile, options.version);
