@@ -59,9 +59,22 @@ You must set `distRepo` to a git endpoint (e.g. `'git@github.com:webpro/awesome-
 
 ### What it does
 
-The version in each of the `pkgFiles` will be incremented (see [usage](#usage)), and committed with the `commitMessage`. It tags the commit `tagName` (and `tagAnnotation`). The `%s` will be replaced with the updated version.
+Many steps need your confirmation before execution.
 
-The plugin will create the distribution build using the `distBuildTask` Grunt task. The `distStageDir` is where the plugin will clone the `distRepo`, and afterwards copies the `distFiles` into (normalized by removing the `distBase` from the target path).
+a. By default, with the current repository:
+	1. The version in each of the `pkgFiles` will be incremented (see [usage](#usage)).
+	1. This change will be committed with the `commitMessage`.
+	1. This commit is tagged with `tagName` (and `tagAnnotation`). The `%s` will be replaced with the updated version.
+	1. The commit plus the tag are pushed.
+	1. If no `distRepo` is configured, the package is published.
+a. Additionally, if a distribution repository is configured:
+	1. The plugin will create the distribution build using the `distBuildTask` Grunt task.
+	1. The `distStageDir` is where the plugin will clone the `distRepo`.
+	1. The `distFiles` are copied here (normalized by removing the `distBase` from the target path).
+	1. Steps a1-a4 are executed for the distribution repository.
+	1. The package is published. 
+
+Also see the [example output](#example-output) below.
 
 ### Usage
 
@@ -85,7 +98,7 @@ You can also do a dry run, which won't write/touch anything, but does output the
 grunt release-it --dry-run
 ```
 
-The Grunt option `--verbose` gives verbose output for this task.
+The Grunt option `--verbose` gives verbose output for this task, while `--force` is obeyed to (re)tag.
 
 ### Example Output
 
@@ -94,31 +107,26 @@ $ grunt release-it
 Running "release-it" task
 
 Release source repo
->> Version bumped to 0.3.25
-Running "build" (copy) task
-
-Done, without errors.
+>> Version bumped to 0.3.25 (package.json)
 [?] Show updated files? Yes
 M  package.json
+M  src/foo.js
 [?] Commit? Yes
 >> Committed changes with message: Release 0.3.25
 [?] Tag version 0.3.25? Yes
 [?] Push to git@github.com:webpro/awesome.git? Yes
-To git@github.com:webpro/awesome.git
-   0081f9a..eb54244  master -> master
 >> Pushed tag 0.3.25 to remote
 
 Release distribution repo
 >> Cloned git@github.com:webpro/awesome-component.git into /Users/lars/Projects/awesome/.stage
->> Version bumped to 0.3.25
+>> Version bumped to 0.3.25 (package.json)
 [?] Show updated files? Yes
+M  foo.min.js
 M  package.json
 [?] Commit? Yes
 >> Committed changes with message: Release 0.3.25
 [?] Tag version 0.3.25? Yes
 [?] Push to git@github.com:webpro/awesome-component.git? Yes
-To git@github.com:webpro/awesome-component.git
-   2b0f6b8..019d616  master -> master
 >> Pushed tag 0.3.25 to remote
 [?] Publish to npm? No
 
@@ -135,13 +143,6 @@ The following plugins have been a big source of inspiration:
 * [grunt-release-component](https://github.com/walmartlabs/grunt-release-component)
 
 Why did I need to create yet another "release" plugin? The first misses the feature to release to a separate distribution repository, while the second does only that. This plugin supports both scenarios, and gives you a more control/insight to what's going on by providing interactivity.
-
-## Todo/Ideas
-
-* Option to publish to npm
-* Option to disable interactivity
-* Tests?!
-* ...?
 
 ## License
 
