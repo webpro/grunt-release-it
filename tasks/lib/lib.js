@@ -72,6 +72,10 @@ module.exports = function(grunt) {
         }
     }
 
+    function npmPublish(path) {
+        run('npm publish ' + path);
+    }
+
     function copy(files, base, dir) {
         var message = 'Copying ' + files + ' to ' + dir;
         if(isDryRun) {
@@ -166,7 +170,8 @@ module.exports = function(grunt) {
             bump: bump,
             copy: copy,
             cd: cd,
-            runBuild: runBuild
+            runBuild: runBuild,
+            npmPublish: npmPublish
         },
         git: {
             status: status,

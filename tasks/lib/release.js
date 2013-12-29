@@ -45,10 +45,21 @@ module.exports = function(git, options, subject) {
             }
             return answers.commit;
         }
+    }, {
+        type: 'confirm',
+        name: 'publish',
+        message: 'Publish to npm?',
+        default: false,
+        when: function(answers) {
+            if(answers.push) {
+                git.push(repo);
+                git.pushTags(options.version);
+            }
+            return (subject === 'src' && !options.distRepo) || (subject === 'dist' && !!options.distRepo);
+        }
     }], function(answers) {
-        if(answers.push) {
-            git.push(repository);
-            git.pushTags(options.version);
+        if(answers.publish) {
+            util.npmPublish(dir);
         }
         enquiry.resolve();
     });

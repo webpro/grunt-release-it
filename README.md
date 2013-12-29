@@ -1,8 +1,8 @@
 # Grunt Release It!
 
-Interactive release task for Git repositories. Optionally release a build to distribution/component repository.
+Interactive release task for Git repositories. Optionally release a build to distribution/component repository. Publish to npm.
 
-Automatically increments version in package.json, commit, tag, push, done.
+Automatically increments version in package.json, commit, tag, push, publish, done.
 
 ## Getting Started
 
@@ -120,6 +120,7 @@ M  package.json
 To git@github.com:webpro/awesome-component.git
    2b0f6b8..019d616  master -> master
 >> Pushed tag 0.3.25 to remote
+[?] Publish to npm? No
 
 Done, without errors.
 ```
