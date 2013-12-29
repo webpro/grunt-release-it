@@ -1,9 +1,11 @@
 var inquirer = require('inquirer'),
     when = require('when');
 
-module.exports = function(git, options, repository) {
+module.exports = function(git, options, subject) {
 
-    var enquiry = when.defer();
+    var enquiry = when.defer(),
+        repo = options[subject + 'Repo'],
+        dir = options[subject + 'Dir'];
 
     inquirer.prompt([{
         type: 'confirm',
@@ -35,7 +37,7 @@ module.exports = function(git, options, repository) {
     }, {
         type: 'confirm',
         name: 'push',
-        message: 'Push to ' + repository + '?',
+        message: 'Push to ' + repo + '?',
         default: true,
         when: function(answers) {
             if(answers.tag) {

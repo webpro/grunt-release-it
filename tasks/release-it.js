@@ -32,7 +32,7 @@ module.exports = function(grunt) {
 
         options.srcDir = path.resolve('');
         options.srcRepo = options.srcRepo ? options.srcRepo : pkg.repository && pkg.repository.url ? pkg.repository.url : null;
-        options.distStageDir = path.resolve(options.srcDir, options.distStageDir);
+        options.distDir = path.resolve(options.srcDir, options.distStageDir);
         options.version = util.incrementVersion(pkg.version, increment);
 
         var releaseSourceRepo = function() {
@@ -54,7 +54,7 @@ module.exports = function(grunt) {
 
                 util.runBuild(options.distBuildTask);
 
-                var releaseEnquiry = release(git, options, options.srcRepo);
+                var releaseEnquiry = release(git, options, 'src');
 
                 releaseSource.resolve(releaseEnquiry);
 
@@ -78,21 +78,21 @@ module.exports = function(grunt) {
                 return releaseDist.reject({log: 'No Git endpoint provided for distribution repository ("distRepo").'});
             }
 
-            git.clone(options.distRepo, options.distStageDir);
+            git.clone(options.distRepo, options.distDir);
 
-            util.copy(options.distFiles, options.distBase, options.distStageDir);
+            util.copy(options.distFiles, options.distBase, options.distDir);
 
             options.pkgFiles.forEach(function(pkgFile) {
-                util.bump(path.join(options.distStageDir, pkgFile), options.version);
+                util.bump(path.join(options.distDir, pkgFile), options.version);
             });
 
-            util.cd(options.distStageDir);
+            util.cd(options.distDir);
 
             git.stageAll();
 
             if(git.hasChanges()) {
 
-                var releaseEnquiry = release(git, options, options.distRepo).then(function() {
+                var releaseEnquiry = release(git, options, 'dist').then(function() {
                     util.cd(options.srcDir);
                 });
 
