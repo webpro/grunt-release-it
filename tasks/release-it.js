@@ -54,7 +54,7 @@ module.exports = function(grunt) {
 
                 util.runBuild(options.distBuildTask);
 
-                var releaseEnquiry = release(git, options, 'src');
+                var releaseEnquiry = release(lib, options, 'src');
 
                 releaseSource.resolve(releaseEnquiry);
 
@@ -92,7 +92,7 @@ module.exports = function(grunt) {
 
             if(git.hasChanges()) {
 
-                var releaseEnquiry = release(git, options, 'dist').then(function() {
+                var releaseEnquiry = release(lib, options, 'dist').then(function() {
                     util.cd(options.srcDir);
                 });
 

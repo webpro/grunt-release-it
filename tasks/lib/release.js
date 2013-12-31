@@ -1,9 +1,11 @@
 var inquirer = require('inquirer'),
     when = require('when');
 
-module.exports = function(git, options, subject) {
+module.exports = function(lib, options, subject) {
 
     var enquiry = when.defer(),
+        util = lib.util,
+        git = lib.git,
         repo = options[subject + 'Repo'],
         dir = options[subject + 'Dir'];
 
