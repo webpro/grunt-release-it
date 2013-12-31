@@ -73,7 +73,12 @@ module.exports = function(grunt) {
     }
 
     function npmPublish(path) {
-        run('npm publish ' + path);
+        var result = run('npm publish ' + path);
+        if('code' in result && result.code !== 0) {
+            grunt.fail.warn(result.output);
+        } else {
+            grunt.log.ok(result.output);
+        }
     }
 
     function copy(files, base, dir) {
