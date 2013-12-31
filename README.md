@@ -42,17 +42,13 @@ grunt.initConfig({
 If you also want to release to "distribution repo", you'll need to provide the `distRepo` as well. Here are the _additional_ options with their default values:
 
 ```js
-grunt.initConfig({
-    'release-it': {
-        options: {
-            distRepo: false,
-            distStageDir: '.stage',
-            distFiles: ['dist/**/*'],
-            distBase: 'dist',
-            distBuildTask: false
-        }
-    }
-});
+options: {
+    distRepo: false,
+    distStageDir: '.stage',
+    distFiles: ['dist/**/*'],
+    distBase: 'dist',
+    distBuildTask: false
+};
 ```
 
 You must set `distRepo` to a git endpoint (e.g. `'git@github.com:webpro/awesome-component.git'`).
@@ -101,7 +97,7 @@ You can also do a dry run, which won't write/touch anything, but does output the
 grunt release-it --dry-run
 ```
 
-The Grunt option `--verbose` gives verbose output for this task, while `--force` is obeyed to (re)tag.
+The Grunt option `-v`/`--verbose` gives verbose output for this task, while `-f`/`--force` is obeyed to (re)tag.
 
 ### Example Output
 
