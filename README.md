@@ -146,3 +146,6 @@ Why did I need to create yet another "release" plugin? The first misses the feat
 ## License
 
 [MIT](http://webpro.mit-license.org/)
+
+
+![Analytics](https://ga-beacon.appspot.com/UA-17415234-3/grunt-release-it/readme?pixel)
