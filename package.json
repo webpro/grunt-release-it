@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/webpro/grunt-release-it.git"
+    "url": "git@github.com:webpro/grunt-release-it.git"
   },
   "bugs": {
     "url": "https://github.com/webpro/grunt-release-it/issues"
@@ -29,12 +29,19 @@
   "keywords": [
     "gruntplugin",
     "release",
-    "component"
+    "component",
+    "tool",
+    "shell",
+    "script",
+    "publish",
+    "repository",
+    "build",
+    "distribution",
+    "npm",
+    "interactive",
+    "git"
   ],
   "dependencies": {
-    "semver": "~2.2.1",
-    "shelljs": "~0.2.6",
-    "inquirer": "~0.3.5",
-    "when": "~2.7.1"
+    "release-it": "~0.0.1"
   }
 }
