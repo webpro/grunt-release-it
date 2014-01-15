@@ -1,7 +1,7 @@
 {
   "name": "grunt-release-it",
   "description": "Interactive release task for Git repositories. Optionally release a build to distribution/component repository.",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "homepage": "https://github.com/webpro/grunt-release-it",
   "author": {
     "name": "Lars Kappert",
