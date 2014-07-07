@@ -6,13 +6,13 @@ module.exports = function(grunt) {
 
         var done = this.async();
 
-        var options = this.options({
-            increment: increment,
-            verbose: !!grunt.option('verbose'),
-            debug: !!grunt.option('debug'),
-            force: !!grunt.option('force'),
-            'dry-run' : !!grunt.option('no-write')
-        });
+        var options = this.options();
+
+        options.increment = increment || options.increment;
+        options.verbose = grunt.option('verbose') === true || options.verbose;
+        options.debug = grunt.option('debug') === true || options.debug;
+        options.force = grunt.option('force') === true || options.force;
+        options['dry-run'] = grunt.option('no-write') === true || options['dry-run'];
 
         release.execute(options).catch(grunt.fail.warn).finally(done);
 
