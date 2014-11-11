@@ -77,7 +77,7 @@ grunt release-it:2.0.0-rc.3
 You can also do a dry run, which won't write/touch anything, but does output the commands it would execute, and shows the interactivity:
 
 ```shell
-grunt release-it --dry-run
+grunt release-it --no-write
 ```
 
 The Grunt options `-v`/`--verbose`, `-f`/`--force`, and `-d`/`--debug` or passed as-is, while `--no-write` is passed as `--dry-run` to Release It!
