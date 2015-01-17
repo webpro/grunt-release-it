@@ -1,10 +1,10 @@
 # Grunt Release It!
 
-Interactive release task for Git repositories. Optionally release a build to distribution/component repository. Publish to npm.
+Interactive release tool for Git repositories. Publish to npm. Optionally build and release to a distribution/component repository.
 
 Automatically increments version in package.json, commit, tag, push, publish, done.
 
-Grunt plugin for the stand-alone [Release It!](https://github.com/webpro/release-it)
+This is the Grunt plugin of [Release It!](https://github.com/webpro/release-it)
 
 ## Getting Started
 
@@ -85,6 +85,3 @@ The Grunt options `-v`/`--verbose`, `-f`/`--force`, and `-d`/`--debug` or passed
 ## License
 
 [MIT](http://webpro.mit-license.org/)
-
-
-![Analytics](https://ga-beacon.appspot.com/UA-17415234-3/grunt-release-it/readme?pixel)
