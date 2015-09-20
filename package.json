@@ -42,6 +42,6 @@
     "git"
   ],
   "dependencies": {
-    "release-it": "~0.0.14"
+    "release-it": "^2.2.0"
   }
 }

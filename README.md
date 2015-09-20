@@ -1,8 +1,8 @@
 # Grunt Release It!
 
-Interactive release tool for Git repositories. Publish to npm. Optionally build and release to a distribution/component repository.
+Interactive release tool for Git repositories. Options: run build command first, release to distribution repository (or branch), create GitHub release, publish to npm.
 
-Automatically increments version in package.json, commit, tag, push, publish, done.
+Automatically bump version, commit, tag, push, done.
 
 This is the Grunt plugin of [Release It!](https://github.com/webpro/release-it)
 
@@ -24,11 +24,11 @@ grunt.loadNpmTasks('grunt-release-it');
 
 ## The "release-it" task
 
-See the [Release It!](https://github.com/webpro/release-it#release-it) for configuration options.
+See [Release It!](https://github.com/webpro/release-it) for [configuration options](https://github.com/webpro/release-it#configuration).
 
 ### Configuration
 
-In your project's Gruntfile, add a section named `release-it` to the data object passed into `grunt.initConfig()`. These are the options with their default values:
+In your project's Gruntfile, add a section named `release-it` to the data object passed into `grunt.initConfig()`. These are some of the options with their default values:
 
 ```js
 grunt.initConfig({
@@ -44,29 +44,15 @@ grunt.initConfig({
 });
 ```
 
-If you also want to release to "distribution repo", you'll need to provide the `distRepo` as well. Here are the _additional_ options with their default values:
-
-```js
-options: {
-    distRepo: false,
-    distStageDir: '.stage',
-    distFiles: ['dist/**/*'],
-    distBase: 'dist',
-    publish: false
-};
-```
-
-You must set `distRepo` to a git endpoint (e.g. `'git@github.com:webpro/awesome-component.git'`).
-
 ### Usage
 
-Make a "patch" release (increments the 0.0.x):
+Release a new patch (increments from e.g. `1.0.4` to `1.0.5`):
 
 ```shell
 grunt release-it
 ```
 
-Make a patch, minor, major or specific version release with e.g.:
+Release a patch, minor, major, or specific version:
 
 ```shell
 grunt release-it:minor
@@ -74,13 +60,18 @@ grunt release-it:0.8.3
 grunt release-it:2.0.0-rc.3
 ```
 
-You can also do a dry run, which won't write/touch anything, but does output the commands it would execute, and shows the interactivity:
+Make sure to check out the main [Release It](https://github.com/webpro/release-it) documentation to learn about all the options and features.
 
-```shell
-grunt release-it --no-write
-```
+### Translated options
 
-The Grunt options `-v`/`--verbose`, `-f`/`--force`, and `-d`/`--debug` or passed as-is, while `--no-write` is passed as `--dry-run` to Release It!
+The following Grunt options are passed on to Release It:
+
+Grunt option | Release-It! option
+---|---
+`--no-write` | `--dry-run`
+`-v`/`--verbose` | _same_
+`-f`/`--force` | _same_
+`-d`/`--debug` | _same_
 
 ## License
 
